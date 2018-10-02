@@ -164,7 +164,7 @@ function split(str, sep) {
   //you don't have to return an array, you can return a string as an array of 
   //character 
   //return str;
-  return [str.slice(0, idx)].concat(split(str.slice(idx + sep.length), sep)) //recursive call makes it linear
+  return [str.slice(0, idx)].concat(split(str.slice(idx + sep.length), sep)); //recursive call makes it linear
   //all these are valid syntax
   //return (str.slice(0,idx) + (split(str.slice(idx + sep.length), sep)))
   //return str.slice(0,idx).concat(split(str.slice(idx + sep.length), sep))
@@ -225,3 +225,24 @@ function printAnagram(word){
   anagrams(' ', word);
 
 }
+
+// Animal Hierarchy polynomial O(n^2)
+const animalHierarchy = [
+  {id: 'Animals', parent: null},
+  {id: 'Mammals', parent: 'Animals'},
+  {id: 'Dogs', parent:'Mammals' },
+  {id: 'Cats', parent:'Mammals' },
+  {id: 'Golden Retriever', parent: 'Dogs'},
+  {id: 'Husky', parent:'Dogs' },
+  {id: 'Bengal', parent:'Cats' }
+];
+
+// ==============================
+function traverse(animalHierarchy, parent) {
+  let node = {}; //constant
+  animalHierarchy.filter(item => item.parent === parent)
+    .forEach(item => node[item.id] = traverse(animalHierarchy, item.id));
+  return node;  
+}
+
+
