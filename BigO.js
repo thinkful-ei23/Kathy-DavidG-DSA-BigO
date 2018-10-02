@@ -120,16 +120,16 @@ function isPrime(n) {
 //RECURSIVE DRILLS
 
 //Count Sheep linear O(n)
-function countSheep(num){
+function countSheep(num) {
   //stopping condition of base case
-  if(num === 0){   // linear O(n)
+  if (num === 0) {   // linear O(n)
     console.log('All sheep jumped over the fence'); //constant
-  } 
+  }
   //this is the recursive case
   //this will be executed until it reaches base case
-  else{
+  else {
     console.log(`${num}: Another sheep jump over the fence`); //constant
-    countSheep(num-1); //constant
+    countSheep(num - 1); //constant
   }
 }
 
@@ -138,7 +138,7 @@ function double_all(arr) {
   if (!arr.length) { //constant
     return []; //constant
   }
-  return [arr[0] * 2, ...double_all(arr.slice(1))]; 
+  return [arr[0] * 2, ...double_all(arr.slice(1))];
 }
 
 //Reverse String linear O(n)
@@ -161,8 +161,8 @@ function split(str, sep) {
   var idx = str.indexOf(sep); //constant
   if (idx == -1) //constant
     return [str]; //constant
-  //you don't have to return an array, you can return a string as an array of 
-  //character 
+  //you don't have to return an array, you can return a string as an array of
+  //character
   //return str;
   return [str.slice(0, idx)].concat(split(str.slice(idx + sep.length), sep)); //recursive call makes it linear
   //all these are valid syntax
@@ -171,22 +171,22 @@ function split(str, sep) {
 }
 
 //Binary Representation Logarithimic time O(log(n))
-function convertToBinary(num){
-  if(num>0){ //constant
-    let binary = Math.floor(num%2); //save the reminder in binary
+function convertToBinary(num) {
+  if (num > 0) { //constant
+    let binary = Math.floor(num % 2); //save the reminder in binary
     //divide the number by 2 and send that to the function again
     //carry the reminder to the next recursion call
-    return (convertToBinary(Math.floor(num/2))+ binary); // O(log(n))
-  }else{
+    return (convertToBinary(Math.floor(num / 2)) + binary); // O(log(n))
+  } else {
     return ''; //base case - at some point the divisions will lead to 0
   }
 }
 
 //Factorial linear O(n)
-function factorial(n) {  
+function factorial(n) {
   // Base Case - when n is equal to 0, we stop the recursion
   if (n === 0) { // constant
-	  return 1; //constant
+    return 1; //constant
   }
   // This is our Recursive Case
   // It will run for all other conditions except when n is equal to 0
@@ -197,30 +197,30 @@ function factorial(n) {
 function fibonacci(n) {
   // Base case
   if (n <= 0) { //constant
-	  return 0; //constant
+    return 0; //constant
   }
   // Base case
   if (n <= 2) { //constant
-	  return 1;
-  }	
+    return 1;
+  }
   // Recursive case
   return fibonacci(n - 1) + fibonacci(n - 2);	//recursive call makes it linear
 }
 
 //Anagrams  Expotential O(2^n)
-function anagrams(prefix, str){
-  if(str.length <= 1){ //constant
+function anagrams(prefix, str) {
+  if (str.length <= 1) { //constant
     console.log(`The anagram is ${prefix}${str}`); //constant
   } else {
-    for(let i=0; i<str.length; i++){ // linear O(n)
-      let currentLetter = str.substring(i, i+1); //constant
-      let previousLetters = str.substring(0,i); //constant
-      let afterLetters = str.substring(i+1); //constant
-      anagrams(prefix+currentLetter, previousLetters+afterLetters); // 
+    for (let i = 0; i < str.length; i++) { // linear O(n)
+      let currentLetter = str.substring(i, i + 1); //constant
+      let previousLetters = str.substring(0, i); //constant
+      let afterLetters = str.substring(i + 1); //constant
+      anagrams(prefix + currentLetter, previousLetters + afterLetters); //
     }
   }
 }
-function printAnagram(word){
+function printAnagram(word) {
   //console.log(`The word for which we will find an anagram is ${word}`);
   anagrams(' ', word);
 
@@ -228,13 +228,13 @@ function printAnagram(word){
 
 // Animal Hierarchy polynomial O(n^2)
 const animalHierarchy = [
-  {id: 'Animals', parent: null},
-  {id: 'Mammals', parent: 'Animals'},
-  {id: 'Dogs', parent:'Mammals' },
-  {id: 'Cats', parent:'Mammals' },
-  {id: 'Golden Retriever', parent: 'Dogs'},
-  {id: 'Husky', parent:'Dogs' },
-  {id: 'Bengal', parent:'Cats' }
+  { id: 'Animals', parent: null },
+  { id: 'Mammals', parent: 'Animals' },
+  { id: 'Dogs', parent: 'Mammals' },
+  { id: 'Cats', parent: 'Mammals' },
+  { id: 'Golden Retriever', parent: 'Dogs' },
+  { id: 'Husky', parent: 'Dogs' },
+  { id: 'Bengal', parent: 'Cats' }
 ];
 
 // ==============================
@@ -242,7 +242,127 @@ function traverse(animalHierarchy, parent) {
   let node = {}; //constant
   animalHierarchy.filter(item => item.parent === parent)
     .forEach(item => node[item.id] = traverse(animalHierarchy, item.id));
-  return node;  
+  return node;
 }
+
+//Organizational Chart
+// linear O(n)
+function traverseA(data, depth = 0) {
+  let indent = " ".repeat(depth * 4); // constant
+  Object.keys(data).forEach(key => {  // linear O(n)
+    console.log(indent + key);  // constant
+    traverseA(data[key], depth + 1)   // linear O(n)
+  });
+}
+// linear O(n)
+function traverseB(node, indent = 0) {
+  for (var key in node) {								// linear O(n)
+    console.log(" ".repeat(indent), key);  // constant
+    traverseB(node[key], indent + 4);			// linear O(n)
+  }
+}
+
+// linear O(n)
+function countSheepLoop(num) {
+  for (let i = num; i > 0; i--) {
+    console.log(`counting sheeps ${i}`);
+  }
+}
+countSheepLoop(10);
+
+// linear O(n)
+function double_all(arr) {
+  let ret = Array(arr.length);
+  for (let i = 0; i < arr.length; ++i) {
+    ret[i] = arr[i] * 2;
+  }
+  return ret;
+}
+let arr = [10, 4, 5, 2, 1];
+console.log(double_all(arr));
+
+
+// linear O(n)
+function reverse_tail(str) {
+  var accumulator = "";
+  while (str !== "") {
+    accumulator = str[0] + accumulator;
+    str = str.slice(1);
+  }
+  return accumulator;
+}
+
+// linear O(n)
+function triangle(n) {
+  var tot = 0;
+  for (var i = 1; i <= n; ++i) {
+    tot += n;
+  }
+  return tot;
+}
+
+// linear O(n)
+function split(str, sep) {
+  var ret = [];
+  while (true) {
+    var idx = str.indexOf(sep);
+    if (idx == -1) break;
+    ret.push(str.slice(0, idx))
+    str = str.slice(idx + sep.length);
+  }
+  ret.push(str);
+  return ret;
+}
+
+// logarithmic O(logn)
+function convertToBinaryIter(num) {
+  var binary = '';
+  while (num > 0) {
+    let rem = Math.floor(num % 2);
+    binary = rem + binary;
+    num = Math.floor(num / 2);
+  }
+  return binary;
+}
+console.log(convertToBinaryIter(124)); //1111100
+
+// linear O(n)
+function factorialIterative(number) {
+  let fact = 1;
+  for (let i = 1; i <= number; i++) {
+    fact *= i;
+  }
+  return fact;
+}
+console.log(factorialIterative(5));
+
+// linear O(n)
+function fibonacciIterative(number) {
+  let num1 = 1;
+  let num2 = 0;
+  let fib = null;
+  while (number > 0) {
+    fib = num1;
+    num1 = num1 + num2;
+    num2 = fib;
+    number--;
+  }
+  return num2;
+
+}
+
+//print the whole sequence
+
+// linear O(n)
+//******** ES6 makes it a bit easier*****
+function fibonacciIterative2(number) {
+  let [num1, num2] = [1, 0];
+  while (number-- > 0) {
+    [num1, num2] = [num2 + num1, num1]
+  }
+  return num2;
+
+}
+console.log(fibonacciIterative2(3));
 
 
